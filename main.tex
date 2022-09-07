@@ -1,0 +1,92 @@
+\documentclass[10pt,landscape]{article}
+
+\input{packages}
+\input{mathCommands}
+\input{textSettings}
+
+\renewcommand{\vec}{\bm}
+
+\newcommand{\topiccolor}{green}
+\renewcommand{\section}[2]{%
+	\renewcommand{\topiccolor}{#2}
+	\begin{tcolorbox}[boxsep=0.5mm, left=1mm, right=1mm, top=0mm, bottom=0mm,
+		colback=#2!30, colframe=#2, arc is angular]%
+		\centering \textbf{#1}%
+	\end{tcolorbox}%
+}
+\newcommand{\cbf}[1]{\textcolor{\topiccolor!80!black}{\textbf{#1}}}
+
+\begin{document}
+
+\begin{multicols*}{3}
+\begin{tcolorbox}[colframe=black, colback=white]
+	\centering \large Plasma Physics with Applications\\
+	\small David Hambr\ae{}us \& Ida Ekmark
+\end{tcolorbox}
+
+\section{What is a plasma}{magenta}
+A plasma is defined via the \cbf{ionization degree} $\alpha$ defined as the
+fraction of ionized particles. At $\alpha > 0.01$ we say it is 
+\cbf{fully ionized}, while for smaller $\alpha$:s its 
+\cbf{weakly / partially ionized}.
+
+\section{Single particles in EM-field}{blue}
+
+The most fundamental equation of motion for a charged particle in an EM-field is
+the \cbf{Lorentz Force Equation:}
+\[
+	m \diff{\vec v}{t} = q(\vec E + \vec v \times \vec B)
+\]
+A constant, nonzero E-field with no B-field gives constant acceleration along
+$\vec E$. A constant, nonzero B-field with no E-field gives rise to helical
+motion with \cbf{cyclotron frequency} $\omega_c = \abs{q} B / m$ and
+\cbf{Larmor radius} $r_L = v_\perp / \omega_c$.
+A constant, nonzero B-field with a constant force $\vec F$ gives a constant
+acceleration from the component of $\vec F$ along the B-field, while the
+component perpendicular to $\vec B$ gives rise to a constant \cbf{drift velocity}
+\[
+	\vec v_D = \frac1q \frac{\vec F_\perp \times \vec B}{B^2}
+\]
+An \emph{inhomogeneous} B-field gives rise to the so called \cbf{grad B drift}.
+The motion parallel to the B-field lines is governed by
+\[
+	m \diff{\vec v_\parallel}{t} = - \mu \nabla_\parallel B,
+\]
+and for the motion perpendicular we get a drift velocity
+\[
+	\vec v_D = \frac\mu q \frac{\vec B \times \nabla B}{B^2}
+\]
+in addition to the Larmor rotation, just like before.
+\begin{center}
+\begin{tikzpicture}[thick]
+	\draw[draw=\topiccolor, dashed, fill=\topiccolor!20] (0,0) rectangle (4.5,-1);
+	\draw[color=\topiccolor] (-0.5,-0.4) circle[radius=0.2]
+		circle[radius=0.014];
+	\node at (0,-1) [anchor=east, color=\topiccolor] 
+		{strong $\vec B$};
+
+	\draw[draw=\topiccolor!50, dashed, fill=\topiccolor!5] (0,0) rectangle (4.5,1);
+	\draw[color=\topiccolor!50] (-0.5,0.4) circle[radius=0.2]
+		circle[radius=0.014];
+	\node at (0,1) [anchor=east, color=\topiccolor!50] 
+		{weak $\vec B$};
+
+	\draw[->, color=\topiccolor] (-1, 0.5) -- node[anchor=east]{$\nabla B$}
+		(-1, -0.5);
+
+	\draw[->] (0,0) 
+		arc[start angle=180, end angle=0, radius=1]
+		arc[start angle=0, end angle=-180, radius=0.4]
+		arc[start angle=180, end angle=0, radius=1]
+		arc[start angle=0, end angle=-180, radius=0.4]
+		arc[start angle=180, end angle=60, radius=1];
+	\draw[thin, <->] (1,0) -- node[anchor=east]{$r_{L1}$} (1,1);
+	\draw[thin, <->] (1.6,0) -- (1.6,-0.4) node[anchor=north]{$r_{L2}$};
+
+\end{tikzpicture}
+\end{center}
+
+\end{multicols*}
+
+\end{document}
+

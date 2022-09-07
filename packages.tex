@@ -1,0 +1,53 @@
+%encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+%language
+\usepackage[english]{babel}
+
+%paper and text body handling
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{lettrine}
+
+%graphics
+\usepackage{graphicx}
+\usepackage[format = plain, labelfont = {bf, it}, textfont = it]{caption}%font settings for captions
+\usepackage{xcolor}
+\usepackage{pdfpages}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{bending}
+
+
+%code
+%\usepackage{minted}
+
+%math
+\usepackage{amsmath}%math
+\usepackage{amssymb}%
+\usepackage{amsfonts}%
+\usepackage{amsthm}%theorems
+\usepackage{aligned-overset}
+\usepackage{siunitx}
+\usepackage{cancel}
+\usepackage{braket}
+\usepackage{bm}
+\usepackage{diffcoeff}
+\usepackage{bbold}
+% Use the correct ds in diffs
+\diffdef{}{
+  op-symbol = \mathrm{d},
+  op-order-sep = 0 mu
+}
+
+%links
+\usepackage[colorlinks=true,
+            linkcolor=red,
+            urlcolor=blue,
+            citecolor=gray]{hyperref}
+
