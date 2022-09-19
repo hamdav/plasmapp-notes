@@ -20,8 +20,8 @@
 
 \begin{multicols*}{3}
 \begin{tcolorbox}[colframe=black, colback=white]
-	\centering \large Plasma Physics with Applications\\
-	\small David Hambr\ae{}us \& Ida Ekmark
+\centering \large Plasma Physics with Applications\\
+\small David Hambr\ae{}us \& Ida Ekmark
 \end{tcolorbox}
 
 \section{What is a plasma}{magenta}
@@ -85,6 +85,100 @@ in addition to the Larmor rotation, just like before.
 
 \end{tikzpicture}
 \end{center}
+TODO: \cbf{Curved fields}
+
+\section{The Vlaslov and Boltzmann equations}{green}
+
+Firstly we define a \cbf{distribution function}, $f(\vec r, \vec v, t)$.
+This gives the expected number of particles occupying the volume in
+phase space $\dl \vec r \dl \vec v$ around the point $(\vec r, \vec v)$
+at time $t$.
+To understand how this $f$ evolves argue that the rate of change of the
+number of particles inside some volume in phase space $\Omega$ must
+be the flux of particles through the walls.
+\[
+	\diffp*{\int_\Omega f \dl \vec r \dl \vec v}{t}
+	= -\int_{\partial_r \Omega} f \vec v \cdot \hat n_r \dl S_r
+	-\int_{\partial_v \Omega} f \vec a \cdot \hat n_v \dl S_v.
+\]
+$\partial_r \Omega$ means the boundry of $\Omega$ in r-space.
+Plopping the $\diffp{}{t}$ into the integral and using Gauss' theorem to
+make the surface integral a volume integral we obtain
+\[
+	\dl \vec r \dl \vec v 
+	\left[\diffp f t + \diffp{}{\vec r} \cdot \vec v f
+	+ \diffp{}{\vec v} \cdot \vec a f
+	\right]
+	=0,
+\]
+which has to be true for all volumes, meaning that the integrand has
+to be 0 everywhere.
+Further noting that $\diffp{}{r} \cdot \vec v = 0$ and plugging in the
+Lorentz force for the acceleration we get the \cbf{Vlaslov equation}
+\[
+	\diffp f t + \vec v \cdot \diffp{f}{\vec r} 
+	+ \frac q m(\vec E + \vec v \times \vec B) \cdot \diffp{f}{\vec v} = 0.
+\]
+The LHS is really the change of $f$ along a particle trajectory (if you let
+$\vec r(t)$ and $\vec v(t)$ be the particle position and velocity at time t),
+so you can let $f$ be the sum of a bunch of delta functions and reduce this to
+the particle description of the plasma.
+But this would not be very useful, instead we let $f$ be some smooth
+distribution.
+This is okay if the collective effect of far away particles are more important
+than the effects of collisions.
+If we want to include the effects of collisions, we add a mysterious term called
+the collision operator to obtain the \cbf{Boltzmann equation}
+\[
+	\diffp f t + \vec v \cdot \diffp{f}{\vec r} 
+	+ \frac q m(\vec E + \vec v \times \vec B) \cdot \diffp{f}{\vec v} 
+	= \left(\diffp f t\right)_c.
+\]
+
+For plasmas in equilibrium, $\diffp f t = 0$ since they are by definition
+stationary in time. This also means that the net flux out of any volume
+in phase space must be 0. TODO why does this mean that the collision operator
+must be 0?
+
+\section{The two fluid model}{olive}
+
+In this model, we try to simplify the equations above by not caring about the
+true $f$, but rather we treat the plasma as a fluid and only care about some of
+its moments.
+A moment $\expval{\psi}$ is defined as the velocity average
+of the function $\psi$:
+\[
+	\expval{\psi} = \frac1n \int \psi f \dl \vec v,
+\]
+where $n$ is the density of particles $n(\vec r) = \int f \dl \vec v$.
+Using the Boltzmann equation we can derive the \cbf{general moment equation}
+\[
+	\begin{split}
+		\diffp*{(n \expval \psi)}{t} + \nabla \cdot (n \expval{\vec v \psi})
+		- \frac{nq}{m} \expval{(\vec E + \vec v \times \vec B) \cdot
+		\diffp{\psi}{\vec v}}\\
+		= \diffp*{(n\expval{\psi})_c}{t}
+	\end{split}
+\]
+This gives a way of solving the time evolution of these microscopic properties
+instead of dealing with $f$ directly.
+However, the problem as you can see in the second term is that the equation for
+the order $k$ moment contains the order $k+1$ moment.
+
+As an easy example, consider the equation for the zero order moment ($\psi =
+1$).
+It becomes
+\[
+	\diff{n_\alpha}{t} + \nabla \cdot (n_\alpha \vec u_\alpha) = 0.
+\]
+$\vec u_\alpha$ is here the average velocity of the particles of species
+$\alpha$ at $\vec r$.
+The is basically the continuity equation.
+As you can see, it does depend on the average velocity,
+and the equation for the average velocity depends on the pressure tensor
+(a second order moment) and so on.
+Somewhere we have to cut it.
+
 
 \end{multicols*}
 
