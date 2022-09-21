@@ -134,11 +134,11 @@ the collision operator to obtain the \cbf{Boltzmann equation}
 	+ \frac q m(\vec E + \vec v \times \vec B) \cdot \diffp{f}{\vec v} 
 	= \left(\diffp f t\right)_c.
 \]
-
+The $ \left(\diffp f t\right)_c$ is interpreted as the rate of change of $f$
+that is due to collisions, and in general we don't have closed form for it.
 For plasmas in equilibrium, $\diffp f t = 0$ since they are by definition
-stationary in time. This also means that the net flux out of any volume
-in phase space must be 0. TODO why does this mean that the collision operator
-must be 0?
+stationary in time, and $\left(\diffp f t\right)_c = 0$ as well since the rate
+of change due to collisions must also be 0.
 
 \section{The two fluid model}{olive}
 
@@ -174,11 +174,59 @@ It becomes
 $\vec u_\alpha$ is here the average velocity of the particles of species
 $\alpha$ at $\vec r$.
 The is basically the continuity equation.
-As you can see, it does depend on the average velocity,
-and the equation for the average velocity depends on the pressure tensor
-(a second order moment) and so on.
+As you can see, it does depend on the average velocity.
+The equation for the velocity (first order moment, $\psi=\vec v$) becomes
+\begin{multline*}
+	n_\alpha m_\alpha \left[ 
+		\diffp{\vec u_\alpha}{t} + (\vec u_\alpha \cdot \nabla)\vec u_\alpha
+	\right]\\
+	= n_\alpha q_\alpha(\vec E + \vec u_\alpha \times \vec B)
+	- \nabla \cdot \vec \Pi_\alpha + \sum_{\beta \neq \alpha} P_{\alpha\beta},
+\end{multline*}
+after a bit of massaging.
+Here $\vec P_{\alpha\beta}$ is the effect of collisions between particles of
+different species on the average velocity and
+$\vec \Pi_\alpha \equiv n_\alpha m_\alpha 
+\expval{(\vec v_\alpha - \vec u_\alpha) (\vec v_\alpha - \vec u_\alpha)}$
+is the pressure tensor (a central second order moment).
+The equation for the second order moments contain a third order moment and so
+on.
 Somewhere we have to cut it.
 
+The reason for calling it the \emph{two} fluid model is that we the proceed
+to model the plasma using two species: electrons and ions.
+
+\section{MHD / Single fluid model}{lime}
+
+In \cbf{magnetohydrodynamics} (MHD) we treat the plasma as a single conducting
+fluid characterized by quantities like the mass density $\rho_m$, the charge
+density $\rho$, the center of mass velocity $\vec V$ and the current density
+$\vec j$.
+These are gotten from the two fluid model in a straight forward manner like
+\begin{align*}
+	\rho_m &\equiv \sum_\alpha m_\alpha n_\alpha\\
+	\rho &\equiv \sum_\alpha q_\alpha n_\alpha\\
+	\vec V &\equiv \frac{1}{\rho_m} \sum_\alpha m_\alpha n_\alpha \vec u_\alpha\\
+	\vec j &\equiv \sum_\alpha q_\alpha n_\alpha \vec u_\alpha
+\end{align*}
+The one-fluid equations are then gotten from the two-fluid equations by clever
+manipulations, e.g. multiplying the continuity equations by the masses / charges
+to get
+\begin{align*}
+	\diffp{\rho_m}{t} + \nabla \cdot (\rho_m \vec V) = 0\\
+	\diffp{\rho}{t} + \nabla \cdot (\vec j) = 0
+\end{align*}
+or conservation of mass and charge.
+
+Similar manipulations of the two-fluid momentum equations yield
+\[
+	\rho_m\left(\diffp{}{t} + \vec V \cdot \nabla\right) \vec V
+	= \vec j \times \vec B - \nabla \cdot \vec \Pi^*
+\]
+and the \cbf{Generalized Ohms law}
+\[
+	bleh\qquad do we even need to write this?
+\]
 
 \end{multicols*}
 
