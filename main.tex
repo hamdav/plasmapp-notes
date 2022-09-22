@@ -193,8 +193,24 @@ The equation for the second order moments contain a third order moment and so
 on.
 Somewhere we have to cut it.
 
+\begin{tcolorbox}[title=An aside: wtf is a \textit{pressure tensor}?,
+	colframe=\topiccolor!10!white, colback=white, coltitle=\topiccolor]
+	If the pressure tensor of a fluid is $\vec \Pi$, then $\vec \Pi \hat n$ is
+	the force per unit area on a surface oriented normal to $\hat n$.
+	It is the same as the negative of the expectation value of the stress
+	tensor: $-\expval{\vec \sigma}$.
+	Why is $\vec \Pi = n m \expval{\vec w \vec w}$, where $\vec w = \vec v -
+	\expval{\vec v}$? Idk. It's kinda the Irving-kirkwood formula, but I don't
+	know where that comes from either.
+\end{tcolorbox}
+
+If $f$ is isotropic (I think even if just the velocity distribution is
+isotropic, but maybe that is what they meant), then $\nabla \cdot \vec \Pi$
+becomes the gradient of the scalar pressure $p=k_B T n$.
+
 The reason for calling it the \emph{two} fluid model is that we the proceed
 to model the plasma using two species: electrons and ions.
+
 
 \section{MHD / Single fluid model}{lime}
 
@@ -227,6 +243,16 @@ and the \cbf{Generalized Ohms law}
 \[
 	bleh\qquad do we even need to write this?
 \]
+
+\section{Maxwells Equations}{gray}
+
+Just for reference, I keep forgetting them all of the time\ldots
+\begin{align*}
+	\nabla \cdot \vec E &= \frac{\rho}{\varepsilon_0}\\
+	\nabla \times \vec E &= -\diffp{\vec B}{t}\\
+	\nabla \cdot \vec B &= 0\\
+	\nabla \times \vec B &= \mu_0\left(J + \varepsilon_0 \diffp{\vec E}{t}\right)
+\end{align*}
 
 \end{multicols*}
 
