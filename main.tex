@@ -16,6 +16,12 @@
 	\nopagebreak%
 }
 \newcommand{\cbf}[1]{\textcolor{\topiccolor!80!black}{\textbf{#1}}}
+\newcommand{\cunderbrace}[2]{%
+	\begingroup
+		\color{\topiccolor}%
+		\underbrace{\color{black}#1}_{\color{\topiccolor}#2}%
+	\endgroup
+}
 
 \begin{document}
 
@@ -25,13 +31,13 @@
 \small David Hambr\ae{}us \& Ida Ekmark
 \end{tcolorbox}
 
-\section{What is a plasma}{magenta}
+\section{What is a plasma}{gray}
 A plasma is defined via the \cbf{ionization degree} $\alpha$ defined as the
 fraction of ionized particles. At $\alpha > 0.01$ we say it is 
 \cbf{fully ionized}, while for smaller $\alpha$:s its 
 \cbf{weakly / partially ionized}.
 
-\section{Single particles in EM-field}{blue}
+\section{Single particles in EM-field}{orange}
 
 The most fundamental equation of motion for a charged particle in an EM-field is
 the \cbf{Lorentz Force Equation:}
@@ -141,7 +147,7 @@ For plasmas in equilibrium, $\diffp f t = 0$ since they are by definition
 stationary in time, and $\left(\diffp f t\right)_c = 0$ as well since the rate
 of change due to collisions must also be 0.
 
-\section{The two fluid model}{olive}
+\section{The two fluid model}{teal}
 
 In this model, we try to simplify the equations above by not caring about the
 true $f$, but rather we treat the plasma as a fluid and only care about some of
@@ -182,7 +188,8 @@ The equation for the velocity (first order moment, $\psi=\vec v$) becomes
 		\diffp{\vec u_\alpha}{t} + (\vec u_\alpha \cdot \nabla)\vec u_\alpha
 	\right]\\
 	= n_\alpha q_\alpha(\vec E + \vec u_\alpha \times \vec B)
-	- \nabla \cdot \vec \Pi_\alpha + \sum_{\beta \neq \alpha} P_{\alpha\beta},
+	- \cunderbrace{\nabla \cdot \vec \Pi_\alpha}{=\nabla p\text{ if isotropic}}
+	+ \sum_{\beta \neq \alpha} P_{\alpha\beta},
 \end{multline*}
 after a bit of massaging.
 Here $\vec P_{\alpha\beta}$ is the effect of collisions between particles of
@@ -190,9 +197,9 @@ different species on the average velocity and
 $\vec \Pi_\alpha \equiv n_\alpha m_\alpha 
 \expval{(\vec v_\alpha - \vec u_\alpha) (\vec v_\alpha - \vec u_\alpha)}$
 is the pressure tensor (a central second order moment).
-The equation for the second order moments contain a third order moment and so
-on.
-Somewhere we have to cut it.
+If $f$ is isotropic (I think even if just the velocity distribution is
+isotropic, but maybe that is what they meant), then $\nabla \cdot \vec \Pi$
+becomes the gradient of the scalar pressure $p=k_B T n$.
 
 \begin{tcolorbox}[title=An aside: wtf is a \textit{pressure tensor}?,
 	colframe=\topiccolor!10!white, colback=white, coltitle=\topiccolor]
@@ -205,13 +212,23 @@ Somewhere we have to cut it.
 	know where that comes from either.
 \end{tcolorbox}
 
-If $f$ is isotropic (I think even if just the velocity distribution is
-isotropic, but maybe that is what they meant), then $\nabla \cdot \vec \Pi$
-becomes the gradient of the scalar pressure $p=k_B T n$.
+In deriving the second order moment $\expval{mv^2/2}$ (p. 67-69) we get
+a Big Boring Expression\texttrademark.
+If we ignore the heat exchange between different fluids, and the
+\cbf{heat conduction vector}
+$\vec Q \equiv n m \expval{\vec w w^2} / 2$
+where $\vec w$ is the deviation from the mean velocity,
+then some shuffling around gives
+\[
+	\frac{p_\alpha}{n_\alpha^{5/3}} = \text{const.}
+\]
+The full equation for the second order moments contain a third order moment and,
+for the third a forth and so on.
+Somewhere we have to cut it, and here we chose to ignore the third,
+thus stopping the chain.
 
 The reason for calling it the \emph{two} fluid model is that we the proceed
 to model the plasma using two species: electrons and ions.
-
 
 \section{MHD / Single fluid model}{lime}
 
@@ -244,6 +261,17 @@ and the \cbf{Generalized Ohms law}
 \[
 	bleh\qquad do we even need to write this?
 \]
+
+\section{Waves}{red}
+
+What is a wave?
+Simply put, when we derive the waves we assume them to be small
+perturbations in the underlying equilibrium state.
+We also usually look at monochromatic waves:
+waves where all of the variables
+(density, electric field, mean velocity)
+vary with the same frequency:
+$X \sim \exp[i (\vec k \cdot \vec r - \omega t)]$.
 
 \section{Maxwells Equations}{gray}
 
