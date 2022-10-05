@@ -224,22 +224,24 @@ the order $k$ moment contains the order $k+1$ moment.
 As an easy example, consider the equation for the zero order moment ($\psi =
 1$).
 It becomes
-\[
+\begin{equation}
+	\label{eq:cont}
 	\diff{n_\alpha}{t} + \nabla \cdot (n_\alpha \vec u_\alpha) = 0.
-\]
+\end{equation}
 $\vec u_\alpha$ is here the average velocity of the particles of species
 $\alpha$ at $\vec r$.
 The is basically the continuity equation.
 As you can see, it does depend on the average velocity.
 The equation for the velocity (first order moment, $\psi=\vec v$) becomes
-\begin{multline*}
+\begin{multline}
+	\label{eq:momentum}
 	n_\alpha m_\alpha \left[ 
 		\diffp{\vec u_\alpha}{t} + (\vec u_\alpha \cdot \nabla)\vec u_\alpha
 	\right]\\
 	= n_\alpha q_\alpha(\vec E + \vec u_\alpha \times \vec B)
 	- \cunderbrace{\nabla \cdot \vec \Pi_\alpha}{=\nabla p\text{ if isotropic}}
 	+ \sum_{\beta \neq \alpha} P_{\alpha\beta},
-\end{multline*}
+\end{multline}
 after a bit of massaging.
 Here $\vec P_{\alpha\beta}$ is the effect of collisions between particles of
 different species on the average velocity and
@@ -268,9 +270,10 @@ If we ignore the heat exchange between different fluids, and the
 $\vec Q \equiv n m \expval{\vec w w^2} / 2$
 where $\vec w$ is the deviation from the mean velocity,
 then some shuffling around gives
-\[
+\begin{equation}
+	\label{eq:state}
 	\frac{p_\alpha}{n_\alpha^{5/3}} = \text{const.}
-\]
+\end{equation}
 The full equation for the second order moments contain a third order moment and,
 for the third a forth and so on.
 Somewhere we have to cut it, and here we chose to ignore the third,
@@ -306,21 +309,58 @@ Similar manipulations of the two-fluid momentum equations yield
 	\rho_m\left(\diffp{}{t} + \vec V \cdot \nabla\right) \vec V
 	= \vec j \times \vec B - \nabla \cdot \vec \Pi^*
 \]
-and the \cbf{Generalized Ohms law}
+and the \cbf{Generalized Ohms law} is yet another Big Boring
+Expression\texttrademark, but it can be approximated as
 \[
-	bleh\qquad do we even need to write this?
+	\vec E + \vec V \times \vec B = \eta \vec j.
 \]
+In very hot plasmas, the rhs can be neglected.
+
 
 \section{Waves}{red}
 
 What is a wave?
 Simply put, when we derive the waves we assume them to be small
 perturbations in the underlying equilibrium state.
-We also usually look at monochromatic waves:
+The basic derivation technique is
+to first linearise the equations governing the evolution of the plasma,
+e.g. equations~\eqref{eq:cont}, \eqref{eq:momentum} and \eqref{eq:state},
+around the equilibrium point, say that the wave is a small perturbation
+(hence waranting the linearisation).
+We then usually look for monochromatic waves:
 waves where all of the variables
 (density, electric field, mean velocity)
-vary with the same frequency:
-$X \sim \exp[i (\vec k \cdot \vec r - \omega t)]$.
+vary with the same frequency.
+Thus we plug in the ansatz $X = X_1 \exp[i(\vec k \cdot \vec r - w t)]$
+for all of the quantities and take the equations to first order.
+This yields a solution and a \cbf{dispersion relation}.
+
+For \cbf{Electrostatic} (meaning no oscillating B-field $\iff$ the waves
+are longitudinal: $\vec k \parallel \vec E$)
+\cbf{Electron Waves} (meaning high oscillation frequencies so that the ions
+can be treated as static) we obtain (p.79-81) the dispersion relation
+\[
+	\omega^2 = \omega_p^2 (1 + 3 \lambda_D^2 k^2)
+\]
+This is only valid for long wavelengths $\lambda_D^2 k^2 \ll 1$.
+If $\lambda_D^2 k^2 \approx 1$ we get \cbf{Landau Dampening}
+from the interaction of the wave with the electrons with velocities close to the
+phase velocity of the wave.
+
+For \cbf{Electrostatic Ion Acoustic Waves} we instead assume that the electrons
+instantly adjust to the potential field and obtain (p.86-87)
+\[
+	\omega^2 = \frac{k^2 c_s^2}{1+k^2 \lambda_D^2}
+\]
+where $c_s^2 \equiv k_BT/m_i$.
+
+For \cbf{Transverse Electromagnetic Waves} (i.e. $\vec k \perp \vec E$)
+with no background magnetic field we obtain 
+\begin{equation*}
+	\omega^2 = \omega_p^2 +  k^2 c^2
+\end{equation*}
+For frequencies below the plasma frequency, waves cannot propagate and are
+reflected.
 
 \section{Maxwells Equations}{gray}
 
