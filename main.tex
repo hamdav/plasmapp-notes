@@ -43,7 +43,7 @@ Debye screening is described by the \cbf{Debye Length} and \cbf{Debye potential}
 	\lambda_{\rm D} &= \sqrt{\frac{\varepsilon_0 k_{\rm B} T}{n_0e^2}}\\
 	\phi_{\rm D} &= \frac{q}{4\pi\varepsilon_0 r}\exp\left(-\frac{r}{\lambda_{\rm D}}\right),
 \end{align*}
-derived on pages 4 -- 6.
+(p. 4 -- 5).
 With the plasma frequency $\omega_{\rm p}=n_0e^2/m_e\varepsilon_0$, the collision frequency $\nu$ and the macroscopic dimension of the plasma $L$, the definition of a plasma requires
 \begin{align*}
 	\lambda_{\rm D} &\ll L\\
@@ -60,14 +60,22 @@ the \cbf{Lorentz Force Equation}:
 \]
 A constant, nonzero E-field with no B-field gives constant acceleration along
 $\vec E$. A constant, nonzero B-field with no E-field gives rise to helical
-motion with \cbf{cyclotron frequency} $\omega_c = \abs{q} B / m$ and
-\cbf{Larmor radius} $r_L = v_\perp / \omega_c$.
+motion with \cbf{cyclotron frequency} $\omega_{\rm c} = \abs{q} B / m$ and
+\cbf{Larmor radius} $r_{\rm L} = v_\perp / \omega_{\rm c}$ (p. 8 -- 9, trick is to divide velocity 
+into one component parallel and one perpendicular to $\vec B$).
+In this circular orbit we have the current and magnetic moment
+\begin{align*}
+	I&=\frac{\abs q \omega_{\rm c}}{2\pi}=\frac{1}{2\pi}\frac{q^2B}{m}\\
+	\mu&=I\pi r_{\rm L}^2=\frac{mv_\perp^2}{2B}=\abs{\frac{q r_{\rm L} v_\perp}{2}},\ \vec \mu = \frac{q\vec r_{\rm L} \times \vec v_\perp}{2}.
+\end{align*}
 A constant, nonzero B-field with a constant force $\vec F$ gives a constant
 acceleration from the component of $\vec F$ along the B-field, while the
 component perpendicular to $\vec B$ gives rise to a constant \cbf{drift velocity}
 \[
 	\vec v_D = \frac1q \frac{\vec F_\perp \times \vec B}{B^2}
 \]
+(p. 11, trick is to divide $\vec v_\perp$ into a constant drift velocity 
+$\vec v_{\rm D}$ and a varying component $u$ which solves the case without a force).
 An \emph{inhomogeneous} B-field gives rise to the so called \cbf{grad B drift}.
 The motion parallel to the B-field lines is governed by
 \[
@@ -75,9 +83,9 @@ The motion parallel to the B-field lines is governed by
 \]
 and for the motion perpendicular we get a drift velocity
 \[
-	\vec v_D = \frac\mu q \frac{\vec B \times \nabla B}{B^2}
+	\vec v_D = \frac\mu q \frac{\vec B \times \nabla B}{B^2} = \frac{mv_\perp^2}{2qB^2}\frac{\vec B \times \nabla B}{B}
 \]
-in addition to the Larmor rotation, just like before.
+in addition to the Larmor rotation, just like before (p. 13 -- 16).
 \begin{center}
 \begin{tikzpicture}[thick]
 	\draw[draw=\topiccolor, dashed, fill=\topiccolor!20] (0,0) rectangle (4.5,-1);
@@ -106,7 +114,23 @@ in addition to the Larmor rotation, just like before.
 
 \end{tikzpicture}
 \end{center}
-TODO: \cbf{Curved fields}
+When the magnetic field lines are curved, $\abs B$ cannot be constant 
+according to Maxwell's equations. 
+Thus this such a magnetic field must be inhomogenous and this gives rise
+both to a \cbf{grad B drift} and a \cbf{curvature drift}
+\begin{equation*}
+	\vec v_{\rm c} = \frac{mv_\parallel^2}{2qB^2}\frac{\vec B \times \nabla B}{B},
+\end{equation*}
+(p. 19).
+For a inhomogeneous magnetic field constant in time the magnetic moment is 
+invariant (p. 23). 
+For amagnetic field slowly varying in time, this is also true which is called
+the first adiabatic invariant (p. 44 -- 45).
+The second adiabatic invariant is the integral 
+\begin{equation*}
+	J = \oint v_\parallel ds
+\end{equation*} 
+(p. 46 -- 47).
 
 \section{The Vlaslov and Boltzmann equations}{green}
 
@@ -226,7 +250,7 @@ becomes the gradient of the scalar pressure $p=k_B T n$.
 	know where that comes from either.
 \end{tcolorbox}
 
-In deriving the second order moment $\expval{mv^2/2}$ (p. 67-69) we get
+In deriving the second order moment $\expval{mv^2/2}$ (p. 67 -- 69) we get
 a Big Boring Expression\texttrademark.
 If we ignore the heat exchange between different fluids, and the
 \cbf{heat conduction vector}
