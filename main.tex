@@ -83,7 +83,7 @@ The motion parallel to the B-field lines is governed by
 \]
 and for the motion perpendicular we get a drift velocity
 \[
-	\vec v_D = \frac\mu q \frac{\vec B \times \nabla B}{B^2} = \frac{mv_\perp^2}{2qB^2}\frac{\vec B \times \nabla B}{B}
+	\vec v_{\nabla B} = \frac\mu q \frac{\vec B \times \nabla B}{B^2} = \frac{mv_\perp^2}{2qB^2}\frac{\vec B \times \nabla B}{B}
 \]
 in addition to the Larmor rotation, just like before (p. 13 -- 16).
 \begin{center}
@@ -118,9 +118,10 @@ When the magnetic field lines are curved, $\abs B$ cannot be constant
 according to Maxwell's equations. 
 Thus this such a magnetic field must be inhomogenous and this gives rise
 both to a \cbf{grad B drift} and a \cbf{curvature drift}
-\begin{equation*}
-	\vec v_{\rm c} = \frac{mv_\parallel^2}{2qB^2}\frac{\vec B \times \nabla B}{B},
-\end{equation*}
+\begin{align*}
+	\vec v_{\rm c} &= \frac{mv_\parallel^2}{qB^2}\frac{\vec B \times \nabla B}{B}\\
+	\implies \vec v_{\nabla B} + \vec v_{\rm c} &= \frac{m}{qB^2}\left(\frac12 v_\perp^2 + v_\parallel^2\right)\frac{\vec B \times \nabla B}{B},
+\end{align*}
 (p. 19).
 For a inhomogeneous magnetic field constant in time the magnetic moment is 
 invariant (p. 23). 
