@@ -36,11 +36,25 @@ A plasma is defined via the \cbf{ionization degree} $\alpha$ defined as the
 fraction of ionized particles. At $\alpha > 0.01$ we say it is 
 \cbf{fully ionized}, while for smaller $\alpha$:s its 
 \cbf{weakly / partially ionized}.
+One important property of a plasma is the ability to quickly screen out changes
+in the electric potential, so called \cbf{Debye Screening}.
+Debye screening is described by the \cbf{Debye Length} and \cbf{Debye potential}
+\begin{align*}
+	\lambda_{\rm D} &= \sqrt{\frac{\varepsilon_0 k_{\rm B} T}{n_0e^2}}\\
+	\phi_{\rm D} &= \frac{q}{4\pi\varepsilon_0 r}\exp\left(-\frac{r}{\lambda_{\rm D}}\right),
+\end{align*}
+derived on pages 4 -- 6.
+With the plasma frequency $\omega_{\rm p}=n_0e^2/m_e\varepsilon_0$, the collision frequency $\nu$ and the macroscopic dimension of the plasma $L$, the definition of a plasma requires
+\begin{align*}
+	\lambda_{\rm D} &\ll L\\
+	\frac{4\pi}{3}\lambda_{\rm D}^3n_0 &\gg 1\\
+	\nu \ll &\omega_{\rm p}.
+\end{align*}
 
 \section{Single particles in EM-field}{orange}
 
 The most fundamental equation of motion for a charged particle in an EM-field is
-the \cbf{Lorentz Force Equation:}
+the \cbf{Lorentz Force Equation}:
 \[
 	m \diff{\vec v}{t} = q(\vec E + \vec v \times \vec B)
 \]
