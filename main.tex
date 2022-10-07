@@ -48,7 +48,7 @@ With the plasma frequency $\omega_{\rm p}^2=n_0e^2/m_e\varepsilon_0$, the collis
 \begin{align*}
 	\lambda_{\rm D} &\ll L\\
 	\frac{4\pi}{3}\lambda_{\rm D}^3n_0 &\gg 1\\
-	\nu \ll &\omega_{\rm p}.
+	\nu &\ll \omega_{\rm p}.
 \end{align*}
 
 \section{Single particles in EM-field}{orange}
@@ -281,7 +281,7 @@ In general
 	\label{eq:state}, 
 \end{equation}
 where $\gamma=(d+2)/d$ and $d$ represents degrees of freedom. 
-For isotropic pressure, as assumed above, $\d=3$.
+For isotropic pressure, as assumed above, $d=3$.
 The full equation for the second order moments contain a third order moment and,
 for the third a forth and so on.
 Somewhere we have to cut it, and here we chose to ignore the third,
@@ -369,13 +369,17 @@ instantly adjust to the potential field and obtain (p.86-87)
 where $c_s^2 \equiv k_BT/m_i$ (p. 86 -- 87).
 
 For \cbf{Transverse Electromagnetic Waves} (i.e. $\vec k \perp \vec E$)
-with no background magnetic field we obtain 
+with no background magnetic field and high-frequency waves (static ions)
+we obtain 
 \begin{equation*}
 	\omega^2 = \omega_p^2 +  k^2 c^2,
 \end{equation*}
 (p. 88 -- 89).
 For frequencies below the plasma frequency, waves cannot propagate and are
 reflected.
+The relation then says that $k = i / \delta$,
+where $\delta$ is the penetration depth, because the spatial variation is
+$\exp[ikx] = \exp[-x/\delta]$.
 Regarding high frequency electromagnetic waves in a magnitized plasma, the waves will be travelling along to the static magnetic field ($\vec k \parallel \vec B_0$) and be transverse. 
 Since the velocity generated from the electric field $\vec E_1$ will together with the static magnetic field give rise to an velocity perpendicular to the electric field due to the Lorentz force, the dynamics in these two perpendicular directions will be coupled and the electric field can thus not be linearly polarized.
 The refractive index for this case 
@@ -402,29 +406,84 @@ With $\vec B_0\parallel\hat{z}$, $\vec E_1\parallel\hat{x}$ and $\vec B_1\parall
 and as the wave propagate past a point A through which a field line passes, the field lines moves in the same direction as the particle -- the field line and particle oscillate together.
 \begin{center}
 	\begin{tikzpicture}[thick, scale=0.9]
-			\draw [->] (0,0) -- (3,0) node [right] {$y$};
-			\draw [->] (0,0) -- (0,3) node [above] {$z$};
-			\draw [->] (0,0) -- (-1.5,-1.5) node [below left] {$x$};
-			\draw [->] (0.5,-0.5) -- (2.25,-0.5) node [right] {$B_1$};
-			\draw [->] (0.5,-0.5) -- (-0.25,-1.25) node [below left] {$E_1$};
-			\draw [->] (2.5,0.75) -- (2.5,1.75) node at (2.75, 1.25) {$k$};
-			\draw [-, dashed] (1.5,-1.5) -- (1.5,3.5);
-			\draw plot[domain=-1.5:3.5, samples=100] ({0.2*sin(\x *175)+1.5}, \x);
-			
-			\draw [->] (3.5,1) -- (4.5,1) node at (4.0,1.25) {$\Delta z$};
-			\draw [-, dashed] (5.5,-1.5) -- (5.5,3.5);
-			\draw plot[domain=-1.5:3.5, samples=100] ({1.5*sin(\x *57+10)+5.5}, \x)	node at ({1.5*sin(1.5*57+10)+5.5+0.5},1.25) {$t$};
-			\fill ({1.5*sin(0.5*57+10)+5.5},0.5) circle[radius=0.08] node at ({1.5*sin(0.5*57+10)+5.5},0.15) {A};
-			
-			\draw[color=\topiccolor] plot[domain=-1.5:3.5, samples=100] ({1.5*sin(\x *57-20)+5.5}, \x)	node at ({1.5*sin(1.5*57+10)+5.5+0.5+0.15},2.05) {$t+\Delta t$};
-			%\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5},1.5) node [above] {$v_{\rm ph}$};
-			%\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5-0.75},0.5) node [left] {$v_y$};
-			\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5},1.5) node [above] {$v_{\rm ph}$};
-			\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5-0.75},0.5) node [below] {$v_y$};
-			\fill[color=\topiccolor] ({1.5*sin(0.5*57-20)+5.5},0.5) circle[radius=0.08] node at ({1.5*sin(0.5*57-20)+5.5},0.15) {A};
+		\draw [->] (0,0) -- (3,0) node [right] {$y$};
+		\draw [->] (0,0) -- (0,3) node [above] {$z$};
+		\draw [->] (0,0) -- (-1.5,-1.5) node [below left] {$x$};
+		\draw [->] (0.5,-0.5) -- (2.25,-0.5) node [right] {$B_1$};
+		\draw [->] (0.5,-0.5) -- (-0.25,-1.25) node [below left] {$E_1$};
+		\draw [->] (2.5,0.75) -- (2.5,1.75) node at (2.75, 1.25) {$k$};
+		\draw [-, dashed] (1.5,-1.5) -- (1.5,3.5);
+		\draw plot[domain=-1.5:3.5, samples=100] ({0.2*sin(\x *175)+1.5}, \x);
+		
+		\draw [->] (3.5,1) -- (4.5,1) node at (4.0,1.25) {$\Delta z$};
+		\draw [-, dashed] (5.5,-1.5) -- (5.5,3.5);
+		\draw plot[domain=-1.5:3.5, samples=100] ({1.5*sin(\x *57+10)+5.5}, \x)	node at ({1.5*sin(1.5*57+10)+5.5+0.5},1.25) {$t$};
+		\fill ({1.5*sin(0.5*57+10)+5.5},0.5) circle[radius=0.08] node at ({1.5*sin(0.5*57+10)+5.5},0.15) {A};
+		
+		\draw[color=\topiccolor] plot[domain=-1.5:3.5, samples=100] ({1.5*sin(\x *57-20)+5.5}, \x)	node at ({1.5*sin(1.5*57+10)+5.5+0.5+0.15},2.05) {$t+\Delta t$};
+		%\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5},1.5) node [above] {$v_{\rm ph}$};
+		%\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5-0.75},0.5) node [left] {$v_y$};
+		\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5},1.5) node [above] {$v_{\rm ph}$};
+		\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5-0.75},0.5) node [below] {$v_y$};
+		\fill[color=\topiccolor] ({1.5*sin(0.5*57-20)+5.5},0.5) circle[radius=0.08] node at ({1.5*sin(0.5*57-20)+5.5},0.15) {A};
 	\end{tikzpicture}
 \end{center}
 If $\vec B_0\perp \vec k$, the two magnetic fields are parallel and thus the direction of the magnetic field does not change but the magnitude does.
+
+\section{Diffusion}{violet}
+
+Adding collisions to the description will induce diffusion.
+We assume that the plasma looses it's entire momentum in a collision.
+This is probably because after the collision, the momentum points
+in an essentially random direction, and thus the expectation value
+of the momentum is zero.
+Therefore the plasma species $\alpha$ looses momentum at a rate of
+$nm\nu\vec u_\alpha$, where $\nu$ is the collision frequency.
+Adding this effect to equation~\eqref{eq:momentum} gives
+\begin{equation}
+	n_\alpha m_\alpha \left[ 
+		\diffp{\vec u_\alpha}{t} + (\vec u_\alpha \cdot \nabla)\vec u_\alpha
+	\right]\\
+	= n_\alpha q_\alpha \vec E 
+	- \nabla p
+	- m n \nu \vec u_\alpha
+\end{equation}
+assuming a non-magnetized isotropic plasma.
+In a stationary situation, this gives a drift velocity
+\begin{equation}
+	\vec v_D = \frac{q}{m\nu} \vec E - \frac{k_BT}{m\nu} \frac{\nabla n}{n}
+\end{equation}
+which naturally leads us to define the
+\cbf{electron mobility}, $\mu$;
+the \cbf{diffusion coefficient}, $D$,
+and the \cbf{particle flux}, $\vec \Gamma$ as
+\begin{align*}
+	\mu &\equiv \frac{q}{m\nu}
+	& D &\equiv \frac{k_BT}{m\nu}
+	& \vec \Gamma &\equiv n\vec v_D
+\end{align*}
+Since electrons are much lighter than ions, their velocities are
+higher and thus their collisions more frequent.
+Therefore they diffuse much faster which means that an electric field forms
+opposing the diffusion of the electrons and boosting the diffusion of the ions.
+In equilibrium, when the electron and ion fluxes are the same,
+the electric field is
+\begin{equation}
+	\vec E = \frac{D_i - D_e}{\mu_i - \mu_e} \frac{\nabla n}{n}
+\end{equation}
+which gives the common flux
+\begin{equation}
+\vec \Gamma_a = - \frac{\mu_i D_e - \mu_e D_i}{\mu_i - \mu_e} \nabla n
+\equiv -D_a \nabla n
+\end{equation}
+Using $\mu_i \ll \abs{\mu_e}$ and the definitions of $\mu$ and $D$ we find that
+$D_a \approx 2D_i \ll D_e$, given that the ion and electron temperatures are
+the same.
+Plugging this into the continuity equation gives \cbf{the diffusion equation}
+\begin{equation}
+	\diffp{n}{t} = D \nabla^2 n
+\end{equation}
+
 \section{Maxwells Equations}{gray}
 
 Just for reference, I keep forgetting them all of the time\ldots
