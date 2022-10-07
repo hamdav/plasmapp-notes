@@ -31,7 +31,7 @@
 \small David Hambr\ae{}us \& Ida Ekmark
 \end{tcolorbox}
 
-\section{What is a plasma}{gray}
+\section{What is a plasma}{pink}
 A plasma is defined via the \cbf{ionization degree} $\alpha$ defined as the
 fraction of ionized particles. At $\alpha > 0.01$ we say it is 
 \cbf{fully ionized}, while for smaller $\alpha$:s its 
@@ -376,7 +376,55 @@ with no background magnetic field we obtain
 (p. 88 -- 89).
 For frequencies below the plasma frequency, waves cannot propagate and are
 reflected.
+Regarding high frequency electromagnetic waves in a magnitized plasma, the waves will be travelling along to the static magnetic field ($\vec k \parallel \vec B_0$) and be transverse. 
+Since the velocity generated from the electric field $\vec E_1$ will together with the static magnetic field give rise to an velocity perpendicular to the electric field due to the Lorentz force, the dynamics in these two perpendicular directions will be coupled and the electric field can thus not be linearly polarized.
+The refractive index for this case 
+\begin{equation*}
+	N^2 = 1 - \frac{\omega_{\rm p}^2}{\omega(\omega \pm \omega_{\rm c})},
+\end{equation*}
+and the waves are cut off when $N=0$ or 
+\begin{equation}
+	\omega = \mp \frac{\omega_{\rm c}}{2}+\sqrt{\frac{\omega_{\rm c}^2}{4}+\omega_{\rm p}^2}
+\end{equation}
+where you get the frequency for the L-wave $\omega_{\rm L}$ using $-$ in the equation above, and using $+$ you get the frequency for the R-wave (p. 97 -- 98).
 
+\cbf{Alfvén waves} are low frequency, transverse electromagnetic waves in a magnitized plasma, and due to the frequency being much lower than the cyclotron frequency the particle velocity perturbations can be approximated to only consist of the $\vec E\times \vec B$ and polarization drifts.
+With the Alfvén velocity $v_{\rm A}\equiv \varepsilon_0B_0c^2/n_0m_i$ the dispersion relation for Alfvén waves is 
+\begin{equation*}
+	\omega2=\frac{k^2v_{\rm A}^2}{1+v_{\rm A}^2/c^2},
+\end{equation*}
+(p. 105 -- 106). 
+If $\vec B_0\parallel \vec k$, the total magnetic field lines become rippled like waves on a string as the electromagnetic wave propagates. 
+With $\vec B_0\parallel\hat{z}$, $\vec E_1\parallel\hat{x}$ and $\vec B_1\parallel\hat{y}$, we have 
+\begin{equation*}
+	\frac{v_y}{v_{\rm ph}}=-\frac{B_1}{B_0},
+\end{equation*}
+and as the wave propagate past a point A through which a field line passes, the field lines moves in the same direction as the particle -- the field line and particle oscillate together.
+\begin{center}
+	\begin{tikzpicture}[thick, scale=0.9]
+			\draw [->] (0,0) -- (3,0) node [right] {$y$};
+			\draw [->] (0,0) -- (0,3) node [above] {$z$};
+			\draw [->] (0,0) -- (-1.5,-1.5) node [below left] {$x$};
+			\draw [->] (0.5,-0.5) -- (2.25,-0.5) node [right] {$B_1$};
+			\draw [->] (0.5,-0.5) -- (-0.25,-1.25) node [below left] {$E_1$};
+			\draw [->] (2.5,0.75) -- (2.5,1.75) node at (2.75, 1.25) {$k$};
+			\draw [-, dashed] (1.5,-1.5) -- (1.5,3.5);
+			\draw plot[domain=-1.5:3.5, samples=100] ({0.2*sin(\x *175)+1.5}, \x);
+			
+			\draw [->] (3.5,1) -- (4.5,1) node at (4.0,1.25) {$\Delta z$};
+			\draw [-, dashed] (5.5,-1.5) -- (5.5,3.5);
+			\draw plot[domain=-1.5:3.5, samples=100] ({1.5*sin(\x *57+10)+5.5}, \x)	node at ({1.5*sin(1.5*57+10)+5.5+0.5},1.25) {$t$};
+			\fill ({1.5*sin(0.5*57+10)+5.5},0.5) circle[radius=0.08] node at ({1.5*sin(0.5*57+10)+5.5},0.15) {A};
+			
+			\draw[color=\topiccolor] plot[domain=-1.5:3.5, samples=100] ({1.5*sin(\x *57-20)+5.5}, \x)	node at ({1.5*sin(1.5*57+10)+5.5+0.5+0.15},2.05) {$t+\Delta t$};
+			%\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5},1.5) node [above] {$v_{\rm ph}$};
+			%\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5-0.75},0.5) node [left] {$v_y$};
+			\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5},1.5) node [above] {$v_{\rm ph}$};
+			\draw[color=\topiccolor] [->] ({1.5*sin(0.5*57-20)+5.5},0.5) -- ({1.5*sin(0.5*57-20)+5.5-0.75},0.5) node [below] {$v_y$};
+			\fill[color=\topiccolor] ({1.5*sin(0.5*57-20)+5.5},0.5) circle[radius=0.08] node at ({1.5*sin(0.5*57-20)+5.5},0.15) {A};
+	\end{tikzpicture}
+\end{center}
+If $\vec B_0\perp \vec k$, the two magnetic fields are parallel and thus the direction of the magnetic field does not change but the magnitude does.
 \section{Maxwells Equations}{gray}
 
 Just for reference, I keep forgetting them all of the time\ldots
