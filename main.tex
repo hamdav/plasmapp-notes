@@ -31,7 +31,7 @@
 \small David Hambr\ae{}us \& Ida Ekmark
 \end{tcolorbox}
 
-\section{What is a plasma}{gray}
+\section{What is a plasma}{pink}
 A plasma is defined via the \cbf{ionization degree} $\alpha$ defined as the
 fraction of ionized particles. At $\alpha > 0.01$ we say it is 
 \cbf{fully ionized}, while for smaller $\alpha$:s its 
@@ -48,7 +48,7 @@ With the plasma frequency $\omega_{\rm p}^2=n_0e^2/m_e\varepsilon_0$, the collis
 \begin{align*}
 	\lambda_{\rm D} &\ll L\\
 	\frac{4\pi}{3}\lambda_{\rm D}^3n_0 &\gg 1\\
-	\nu \ll &\omega_{\rm p}.
+	\nu &\ll \omega_{\rm p}.
 \end{align*}
 
 \section{Single particles in EM-field}{orange}
@@ -281,7 +281,7 @@ In general
 	\label{eq:state}, 
 \end{equation}
 where $\gamma=(d+2)/d$ and $d$ represents degrees of freedom. 
-For isotropic pressure, as assumed above, $\d=3$.
+For isotropic pressure, as assumed above, $d=3$.
 The full equation for the second order moments contain a third order moment and,
 for the third a forth and so on.
 Somewhere we have to cut it, and here we chose to ignore the third,
@@ -369,13 +369,71 @@ instantly adjust to the potential field and obtain (p.86-87)
 where $c_s^2 \equiv k_BT/m_i$ (p. 86 -- 87).
 
 For \cbf{Transverse Electromagnetic Waves} (i.e. $\vec k \perp \vec E$)
-with no background magnetic field we obtain 
+with no background magnetic field and high-frequency waves (static ions)
+we obtain 
 \begin{equation*}
 	\omega^2 = \omega_p^2 +  k^2 c^2,
 \end{equation*}
 (p. 88 -- 89).
 For frequencies below the plasma frequency, waves cannot propagate and are
 reflected.
+The relation then says that $k = i / \delta$,
+where $\delta$ is the penetration depth, because the spatial variation is
+$\exp[ikx] = \exp[-x/\delta]$.
+
+\section{Diffusion}{violet}
+
+Adding collisions to the description will induce diffusion.
+We assume that the plasma looses it's entire momentum in a collision.
+This is probably because after the collision, the momentum points
+in an essentially random direction, and thus the expectation value
+of the momentum is zero.
+Therefore the plasma species $\alpha$ looses momentum at a rate of
+$nm\nu\vec u_\alpha$, where $\nu$ is the collision frequency.
+Adding this effect to equation~\eqref{eq:momentum} gives
+\begin{equation}
+	n_\alpha m_\alpha \left[ 
+		\diffp{\vec u_\alpha}{t} + (\vec u_\alpha \cdot \nabla)\vec u_\alpha
+	\right]\\
+	= n_\alpha q_\alpha \vec E 
+	- \nabla p
+	- m n \nu \vec u_\alpha
+\end{equation}
+assuming a non-magnetized isotropic plasma.
+In a stationary situation, this gives a drift velocity
+\begin{equation}
+	\vec v_D = \frac{q}{m\nu} \vec E - \frac{k_BT}{m\nu} \frac{\nabla n}{n}
+\end{equation}
+which naturally leads us to define the
+\cbf{electron mobility}, $\mu$;
+the \cbf{diffusion coefficient}, $D$,
+and the \cbf{particle flux}, $\vec \Gamma$ as
+\begin{align*}
+	\mu &\equiv \frac{q}{m\nu}
+	& D &\equiv \frac{k_BT}{m\nu}
+	& \vec \Gamma &\equiv n\vec v_D
+\end{align*}
+Since electrons are much lighter than ions, their velocities are
+higher and thus their collisions more frequent.
+Therefore they diffuse much faster which means that an electric field forms
+opposing the diffusion of the electrons and boosting the diffusion of the ions.
+In equilibrium, when the electron and ion fluxes are the same,
+the electric field is
+\begin{equation}
+	\vec E = \frac{D_i - D_e}{\mu_i - \mu_e} \frac{\nabla n}{n}
+\end{equation}
+which gives the common flux
+\begin{equation}
+\vec \Gamma_a = - \frac{\mu_i D_e - \mu_e D_i}{\mu_i - \mu_e} \nabla n
+\equiv -D_a \nabla n
+\end{equation}
+Using $\mu_i \ll \abs{\mu_e}$ and the definitions of $\mu$ and $D$ we find that
+$D_a \approx 2D_i \ll D_e$, given that the ion and electron temperatures are
+the same.
+Plugging this into the continuity equation gives \cbf{the diffusion equation}
+\begin{equation}
+	\diffp{n}{t} = D \nabla^2 n
+\end{equation}
 
 \section{Maxwells Equations}{gray}
 
