@@ -71,9 +71,10 @@ In this circular orbit we have the current and magnetic moment
 A constant, nonzero B-field with a constant force $\vec F$ gives a constant
 acceleration from the component of $\vec F$ along the B-field, while the
 component perpendicular to $\vec B$ gives rise to a constant \cbf{drift velocity}
-\[
+\begin{equation}
+	\label{eq:diam_drift}
 	\vec v_D = \frac1q \frac{\vec F_\perp \times \vec B}{B^2}
-\]
+\end{equation}
 (p. 11, trick is to divide $\vec v_\perp$ into a constant drift velocity 
 $\vec v_{\rm D}$ and a varying component $u$ which solves the case without a force).
 An \emph{inhomogeneous} B-field gives rise to the so called \cbf{grad B drift}.
@@ -442,7 +443,7 @@ of the momentum is zero.
 Therefore the plasma species $\alpha$ looses momentum at a rate of
 $nm\nu\vec u_\alpha$, where $\nu$ is the collision frequency.
 Adding this effect to equation~\eqref{eq:momentum} gives
-\begin{equation}
+\begin{equation}\label{eq:diffusion_momentum}
 	n_\alpha m_\alpha \left[ 
 		\diffp{\vec u_\alpha}{t} + (\vec u_\alpha \cdot \nabla)\vec u_\alpha
 	\right]\\
@@ -451,12 +452,12 @@ Adding this effect to equation~\eqref{eq:momentum} gives
 	- m n \nu \vec u_\alpha
 \end{equation}
 assuming a non-magnetized isotropic plasma.
-In a stationary situation, this gives a drift velocity
+In a stationary situation (LHS = 0), this gives a drift velocity
 \begin{equation}
 	\vec v_D = \frac{q}{m\nu} \vec E - \frac{k_BT}{m\nu} \frac{\nabla n}{n}
 \end{equation}
 which naturally leads us to define the
-\cbf{electron mobility}, $\mu$;
+\cbf{mobility}, $\mu$;
 the \cbf{diffusion coefficient}, $D$,
 and the \cbf{particle flux}, $\vec \Gamma$ as
 \begin{align*}
@@ -486,6 +487,114 @@ Plugging this into the continuity equation gives \cbf{the diffusion equation}
 	\diffp{n}{t} = D \nabla^2 n
 \end{equation}
 
+For a \emph{magnetized} plasma, the collisions play a different role.
+In the limit of very strong magnetic field,
+when the Larmor radius is much smaller than the mean free path,
+there are no collisions, and thus no diffusion.
+Somewhere in between the collisions effectively make the particles walk
+a random walk (or more specifically, their guiding centers walk a random walk)
+with step length $r_L$.
+This gives a diffusion coefficient perpendicular to the magnetic field of
+$D_\perp = r_L^2 \nu$.
+Note that this also agrees with the interpretation of the non-magnetized plasma
+though there the random walk has steps of $\lambda_m$ (mean free path).
+\tikzset{%
+insert arc/.style args={#1:#2:#3 with center #4}{%
+  insert path={%
+    \pgfextra{%
+      \pgfpointxy{#3}{#3}%
+      \pgfgetlastxy\arcrx\arcry%
+      \pgfcoordinate{#4}{%
+        \pgfpoint{\csname tikz@lastx\endcsname+\arcrx*cos(#1+180)}%
+          {\csname tikz@lasty\endcsname+\arcry*sin(#1+180)}}
+      }
+    arc (#1:#2:#3) 
+    }
+  }
+}
+\begin{center}
+\begin{tikzpicture}[%orbit/.style={draw=black, dashed, thin},
+	orbit/.style={draw=black, dashed, thin, circle, inner sep=0, minimum
+	size=2cm},
+	collision/.style={star, star points=5, star point ratio=0.3,
+	fill=orange},%\topiccolor!50},
+	ppath/.style={draw=\topiccolor, thick, ->},
+	rwpath/.style={draw=\topiccolor, very thick, ->}]
+	\draw[ppath] (0,0) 
+		[insert arc={270:110:1 with center A}]
+		node[collision] {}
+		[insert arc={235:40:1 with center B}]
+		node[collision] {}
+		[insert arc={180:-80:1 with center C}]
+		node[collision] {}
+		[insert arc={200:-120:1 with center D}]
+		node[collision] {}
+		[insert arc={60:10:1 with center E}]
+		node[collision] {}
+		[insert arc={180:-20:1 with center F}];
+	\begin{scope}[on background layer]
+		\draw[rwpath] (A) node[orbit] {}
+			-- (B) node[orbit] {}
+			-- (C) node[orbit] {}
+			-- (D) node[orbit] {}
+			-- (E) node[orbit] {}
+			-- (F) node[orbit] {};
+	\end{scope}
+\end{tikzpicture}
+\end{center}
+
+Finding the drift velocity from the equivalent of
+equation~\eqref{eq:diffusion_momentum} gives (p.119)
+\begin{equation}
+	\vec v_D = \mu_\perp \vec E - D_\perp \frac{\nabla n}{n} 
+	+ \frac{\mu^2 B^2}{1 + \mu^2 B^2}
+	(\vec v_{\vec E \times \vec B} + \vec v_\text{diam})
+\end{equation}
+with $\mu_\perp = \mu / (1 + \mu^2 B^2)$ and $D_\perp = D / (1 + \mu^2 B^2)$.
+and $\vec v_{\vec E \times \vec B}$ and $\vec v_\text{diam}$ being
+the $\vec E \times \vec B$-drift and the diamagnetic drift
+(equation~\eqref{eq:diam_drift}: with $\vec F = -k_B T \nabla n / n$).
+Thus, the drift comes in two parts:
+Firstly the usual diffusional motion, but slightly lessened;
+and secondly a drift velocity perpendicular to $\vec B$.
+The coefficient determining the ratio between these is
+$\mu^2 B^2 = \lambda_m^2 / r_L^2$.
+
+\section{Collisions}{blue}
+
+\cbf{Collisions between like particles} does not lead to any diffusion in a magnetized
+plasma. This is easily seen by the fact that the guiding centers of the two
+particles will move exactly opposite each other during the collision, meaning
+that on average, the coarse grained density did not change.
+
+\cbf{Collisions between electrons and ions} leads to a momentum exchange between the
+two fluids. This is the last term of the momentum equation
+(eq~\eqref{eq:momentum}).
+This momentum transfer can be written
+\begin{equation}
+	\vec P_{ei} = m_e n (\vec v_i - \vec v_e) \nu_{ei}
+	= \eta n^2 e^2 (\vec v_i - \vec v_e)
+\end{equation}
+where the last equality was gotten from reasoning about what the momentum
+transfer should be proportional to
+($e^2$, $n_in_e \approx n^2$, and $\vec v_i - \vec v_e$)
+and defining $\eta$ to be the proportionality constant.
+Note here that $\nu_{ie}$ is the frequency with which the ion changes
+direction from collisions with the electrons, which is not necessarily the
+collision frequency.
+Also note that $\eta$ is the resistivity. 
+Taking the force balanced version of equation~\eqref{eq:momentum} with
+$\vec B = 0$ and $\nabla p_e = 0$ we get
+\begin{equation}
+	en \vec E = \vec P_{ei}
+	= \eta n^2 e^2 (\vec v_i - \vec v_e)
+	= \eta n e \vec j \implies \vec E = \eta \vec j
+\end{equation}
+i.e. Ohms law with the specific resistivity $\eta$.
+Some things to note about the resistivity of a plasma is that it is independent
+of the plasma density and that it decreases with increasing plasma temperature.
+
+
 \section{Maxwells Equations}{gray}
 
 Just for reference, I keep forgetting them all of the time\ldots
@@ -497,6 +606,8 @@ Just for reference, I keep forgetting them all of the time\ldots
 \end{align*}
 
 \end{multicols*}
+
+TODO Taylor states (lecture 5 slide 38)?
 
 \end{document}
 
